@@ -1,0 +1,28 @@
+window.onload = pageLoad;
+function pageLoad(){
+	$("submitchat").onclick = getChats;
+}
+
+function getChats(){
+	//retrieve value from the 'chatInput' textbox
+	var chatInput = $("chatInput").value;
+	new Ajax.Request( "getChat.php", 
+	{ 
+		method: "post", 
+		parameters: {chattext:chatInput},
+		onSuccess: displayChats,
+		onFailure: displayFailureMessage
+	} 
+	);
+}
+
+
+function displayChats(ajax){
+  alert("response3:" +ajax.responseText );
+  $("chatOutput").innerHTML = ajax.responseText;
+
+}
+
+function displayFailureMessage(){
+	alert('ajax request failed');
+}
